@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+		<link
+			href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css"
+			rel="stylesheet"
+			integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x"
+			crossorigin="anonymous"
+		/>
+		<link
+			rel="stylesheet"
+			href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"
+		/>
+		<style>
+			@media (max-width: 575.98px) {
+				.col-4,
+				.col-8 {
+					width: 100%;
+				}
+			}
+		</style>
+		<title>To-do list</title>
+	</head>
+	<body>
+		<div class="container">
+			<div class="row mt-5 mb-5">
+				<div class="form-section col col-4 mx-auto">
+					<div class="card">
+						<div class="card-body">
+							<h5 class="card-title">Добавить новую задачу</h5>
+							<form name="addTask">
+								<input
+									type="text"
+									name="title"
+									id="title"
+									class="form-control mt-3"
+									placeholder="Название"
+								/>
+								<input
+									type="text"
+									name="description"
+									id="description"
+									class="form-control mt-3"
+									placeholder="Описание"
+								/>
+								<button
+									type="submit"
+									class="btn btn-primary mt-3"
+								>
+									<i class="bi bi-plus-circle-fill"></i>
+									Добавить
+								</button>
+							</form>
+						</div>
+					</div>
+				</div>
+				<div class="tasks-list-section col-8">
+					<div class="col mx-auto">
+						<ul class="list-group"></ul>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<script src="app.js"></script>
+	</body>
+</html>
