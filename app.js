@@ -1,3 +1,4 @@
+// Список задач
 const tasks = [
   {
     _id: "5d2ca9e2e03d40b326596aa7",
@@ -23,6 +24,7 @@ const tasks = [
   },
 ];
 
+// Перечень доступных тем
 const themes = {
   default: {
     "--base-text-color": "#212529",
@@ -94,7 +96,7 @@ const themes = {
     return acc;
   }, {});
 
-  // Elements UI
+  // UI элементы
   const listContainer = document.querySelector(
     ".tasks-list-section .list-group"
   );
@@ -102,20 +104,23 @@ const themes = {
   const inputTitle = form.elements["title"];
   const inputDescription = form.elements["description"];
   const themeSelect = document.getElementById("themeSelect");
-  let lastSelectedTheme = "default";
+  let lastSelectedTheme = localStorage.getItem("app_theme") || "default";
 
-  // Events
+  // События
+  setTheme(lastSelectedTheme);
   renderAllTasks(objOfTasks);
   form.addEventListener("submit", onFormSubmitHandler);
   listContainer.addEventListener("click", onDeleteHandler);
   themeSelect.addEventListener("change", onThemeSelectHandler);
 
+  // Проверка на передачу списка задач
   function renderAllTasks(tasksList) {
     if (!tasksList) {
       console.error("Нет ни одной задачи!");
       return;
     }
 
+    // Добавление задач на страницу
     const fragment = document.createDocumentFragment();
     Object.values(tasksList).forEach((task) => {
       const li = listItemTemplate(task);
@@ -124,6 +129,7 @@ const themes = {
     listContainer.appendChild(fragment);
   }
 
+  // Функция, которая собирает элементы, для добавление в fragment всех задач
   function listItemTemplate({ _id, title, text } = {}) {
     const li = document.createElement("li");
     li.classList.add(
@@ -155,6 +161,7 @@ const themes = {
     return li;
   }
 
+  // Функция обратотки события приема данных с формы
   function onFormSubmitHandler(e) {
     e.preventDefault();
     const titleValue = inputTitle.value;
@@ -171,6 +178,7 @@ const themes = {
     form.reset();
   }
 
+  // Создание новой задачи
   function createNewTask(title, text) {
     const newTask = {
       title,
@@ -183,6 +191,7 @@ const themes = {
     return { ...newTask };
   }
 
+  // Удаление задачи
   function deleteTask(id) {
     const { title } = objOfTasks[id];
     const isConfirmm = confirm(
@@ -218,8 +227,10 @@ const themes = {
     }
     setTheme(selectedTheme);
     lastSelectedTheme = selectedTheme;
+    localStorage.setItem("app_theme", selectedTheme);
   }
 
+  // Установка темы
   function setTheme(name) {
     const selectedThemeObj = themes[name];
     Object.entries(selectedThemeObj).forEach(([key, value]) => {
